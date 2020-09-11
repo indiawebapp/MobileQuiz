@@ -8,6 +8,7 @@ var ScoreIncorrect=0;
 var ScoreNotAttempted=0;
 
 
+
 AppInitialize()
 function AppInitialize(){
     document.getElementById('Ques').style.display='none';
@@ -38,19 +39,19 @@ async function GetData(Ques_No){
     document.getElementById('Option2').textContent=columns[3];
     document.getElementById('Option3').textContent=columns[4];
     document.getElementById('Option4').textContent=columns[5];
-
+    
     rightAns=columns[6];
-
+   
     if (Ques_No==0) {
         document.getElementById('BtnPrevious').style.display='none';
     } else{
         //document.getElementById('BtnPrevious').style.display='block';
     };
     if (Ques_No==myTable.length-2) {
-        //alert(myTable.length);
+        alert(myTable.length);
         document.getElementById('BtnNext').style.display='none';
         document.getElementById('BtnFinish').style.display='block';
-
+        
     } else{
         document.getElementById('BtnNext').style.display='block';
     }
@@ -106,7 +107,7 @@ function callStartQuestion(){
 document.getElementById('BtnNext').addEventListener('click',callNextQuestion);
 
 function callNextQuestion(){
-
+    ButtonClick='Enable';
     UpdateScore();
     ResetScreen();
     Ques_No++;
@@ -146,7 +147,7 @@ function callFinish(){
     } else{
         document.getElementById('Ques').textContent='Sorry, we could not generate the final score for you.'
     }
-
+    
 
     document.getElementById('Option1').style.display='none';
     document.getElementById('Option2').style.display='none';
@@ -174,8 +175,16 @@ document.getElementById('Option3').addEventListener('click',callCheckOption3);
 document.getElementById('Option4').addEventListener('click',callCheckOption4);
 
 function callCheckOption1(){
+    if(document.getElementById('Option1').className=="btn btn-primary btn-sm btn-block"){
+   
     var myAns=document.getElementById('Option1').innerHTML;
     document.getElementById('Announcement').style.display='Block';
+    
+    //Disable other options
+    document.getElementById('Option2').className="btn btn-secondary btn-sm btn-block";
+    document.getElementById('Option3').className="btn btn-secondary btn-sm btn-block";
+    document.getElementById('Option4').className="btn btn-secondary btn-sm btn-block";
+    
     if (rightAns.trim()==myAns.trim()) {
         Result='Correct';
         document.getElementById('Announcement').textContent='That\'s correct, '+ myName ;
@@ -189,10 +198,19 @@ function callCheckOption1(){
         document.getElementById('Option1').className="form-control is-invalid btn-sm"
     }
 }
+    
+}
 
 function callCheckOption2(){
+
+    if(document.getElementById('Option2').className=="btn btn-primary btn-sm btn-block"){
     var myAns=document.getElementById('Option2').innerHTML;
     document.getElementById('Announcement').style.display='Block';
+
+    //Disable other options
+    document.getElementById('Option1').className="btn btn-secondary btn-sm btn-block";
+    document.getElementById('Option3').className="btn btn-secondary btn-sm btn-block";
+    document.getElementById('Option4').className="btn btn-secondary btn-sm btn-block";
     if (rightAns.trim()==myAns.trim()) {
         Result='Correct'
         document.getElementById('Announcement').textContent='Great '+myName+'! you are a genius';
@@ -205,10 +223,18 @@ function callCheckOption2(){
         document.getElementById('Option2').className="form-control is-invalid btn-sm"
     }
 }
+}
 
 function callCheckOption3(){
+
+    if(document.getElementById('Option3').className=="btn btn-primary btn-sm btn-block"){
     var myAns=document.getElementById('Option3').innerHTML;
     document.getElementById('Announcement').style.display='Block';
+
+    //Disable other options
+    document.getElementById('Option1').className="btn btn-secondary btn-sm btn-block";
+    document.getElementById('Option2').className="btn btn-secondary btn-sm btn-block";
+    document.getElementById('Option4').className="btn btn-secondary btn-sm btn-block";
     if (rightAns.trim()==myAns.trim()) {
         Result='Correct';
         document.getElementById('Announcement').textContent='Super '+myName+'! you have got it right';
@@ -221,10 +247,19 @@ function callCheckOption3(){
         document.getElementById('Option3').className="form-control is-invalid btn-sm"
     }
 }
+}
 
 function callCheckOption4(){
+
+    if(document.getElementById('Option4').className=="btn btn-primary btn-sm btn-block"){
     var myAns=document.getElementById('Option4').innerHTML;
     document.getElementById('Announcement').style.display='Block';
+
+    //Disable other options
+    document.getElementById('Option1').className="btn btn-secondary btn-sm btn-block";
+    document.getElementById('Option2').className="btn btn-secondary btn-sm btn-block";
+    document.getElementById('Option3').className="btn btn-secondary btn-sm btn-block";
+
     if (rightAns.trim()==myAns.trim()) {
         Result='Correct';
         document.getElementById('Announcement').textContent='Wow '+myName+'! you have got it right';
@@ -237,15 +272,16 @@ function callCheckOption4(){
         document.getElementById('Option4').className="form-control is-invalid btn-sm"
     }
 }
+}
 
 function UpdateScore(){
 //Check Result
  if (Result.trim()=='Correct') {
     ScoreCorrect++;
-    document.getElementById("CorrectAns").innerHTML=ScoreCorrect;
+    document.getElementById("CorrectAns").innerHTML=ScoreCorrect;   
  } else if(Result.trim()=='In-Correct') {
     ScoreIncorrect++;
-    document.getElementById("WrongAns").innerHTML=ScoreIncorrect;
+    document.getElementById("WrongAns").innerHTML=ScoreIncorrect;   
  } else{
     ScoreNotAttempted++;
     document.getElementById("NotAttempted").innerHTML=ScoreNotAttempted;
@@ -253,3 +289,6 @@ function UpdateScore(){
  //Reset Results
     Result='Not Attempted';
 }
+
+
+
