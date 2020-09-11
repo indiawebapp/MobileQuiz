@@ -48,7 +48,7 @@ async function GetData(Ques_No){
         //document.getElementById('BtnPrevious').style.display='block';
     };
     if (Ques_No==myTable.length-2) {
-        alert(myTable.length);
+        //alert(myTable.length);
         document.getElementById('BtnNext').style.display='none';
         document.getElementById('BtnFinish').style.display='block';
         
@@ -107,7 +107,7 @@ function callStartQuestion(){
 document.getElementById('BtnNext').addEventListener('click',callNextQuestion);
 
 function callNextQuestion(){
-    ButtonClick='Enable';
+    
     UpdateScore();
     ResetScreen();
     Ques_No++;
@@ -275,7 +275,7 @@ function callCheckOption4(){
 }
 
 function UpdateScore(){
-//Check Result
+// Result
  if (Result.trim()=='Correct') {
     ScoreCorrect++;
     document.getElementById("CorrectAns").innerHTML=ScoreCorrect;   
